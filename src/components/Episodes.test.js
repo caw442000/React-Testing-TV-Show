@@ -603,12 +603,12 @@ const episodes = {
 
 
 test('Episodes page renders correctly', () =>{
-  // const mockEpisodes = jest.fn();
-  // const { } = render(
-  //   <Episodes episodes={episodes}/>
-  // );
- 
+  const mockEpisodes = jest.fn();
+  const { queryAllByTestId } = render(
+    <Episodes episodes={[]}/>
+  );
 
-
+  expect(queryAllByTestId(/episode/i)).toStrictEqual([]);
+  expect(queryAllByTestId(/episode/i)).toHaveLength(0);
 
 })

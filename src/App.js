@@ -11,7 +11,7 @@ import "./styles.css";
 
 export default function App() {
   const [show, setShow] = useState(null);
-  const [seasons, setSeasons] = useState([]);
+  const [seasons, setSeasons] = useState({});
   const [selectedSeason, setSelectedSeason] = useState("");
   const episodes = seasons[selectedSeason] || [];
 
@@ -19,6 +19,7 @@ export default function App() {
 
     fetchShow()
     .then(res => {
+      console.log("the show", res)
       setShow(res.data);
       setSeasons(formatSeasons(res.data._embedded.episodes));
     })
@@ -35,9 +36,10 @@ export default function App() {
   return (
     <div className="App">
       <img className="poster-img" src={show.image.original} alt={show.name} />
-      <h1 data-testid="show-name">{show.name}</h1>
+      <h1 data-testid="showName">{show.name}</h1>
       {parse(show.summary)}
       <Dropdown
+        data-testid="dropdown"
         options={Object.keys(seasons)}
         onChange={handleSelect}
         value={selectedSeason || "Select a season"}
